@@ -3,15 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "get-graphql-schema": "^2.1.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-scripts": "3.1.2"
+    "react-relay": "^6.0.0",
+    "react-router-dom": "^5.1.1",
+    "react-scripts": "3.1.2",
+    "subscriptions-transport-ws": "^0.9.16"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "relay": "get-graphql-schema https://api.graph.cool/relay/v1/ck0uqlhn64ml70167nkihjuas  > ./schema.graphql",
+    "relay:compile": "relay-compiler --src ./src --schema ./schema.graphql",
+    "pretty": "prettier --write \"./**/*.{js,jsx,json}\""
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -27,5 +34,15 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "babel-plugin-relay": "^6.0.0",
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.16.0",
+    "prettier": "^1.18.2",
+    "relay-compiler": "^6.0.0"
   }
 }

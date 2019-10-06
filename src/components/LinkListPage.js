@@ -1,0 +1,40 @@
+import React, { Component } from 'react'
+import { QueryRenderer } from 'react-relay'
+import graphql from 'babel-plugin-relay/macro'
+
+import environment from '../Environment'
+import LinkList from './LinkList'
+import { ITEMS_PER_PAGE } from '../constants'
+
+const LinkListPageQuery = graphql`
+  query LinkListPageQuery($count: Int!, $after: String) {
+    viewer {
+      ...LinkList_viewer
+    }
+  }
+`
+
+class LinkListPage extends Component {
+  render() {
+    return (
+      <QueryRenderer
+        environment={environment}
+        query={LinkListPageQuery}
+        variables={{
+          count: ITEMS_PER_PAGE,
+        }}
+        render={({ error, props }) => {
+          if (error) {
+            return <div>{error.message}</div>
+          }
+          if (!props && !error) {
+            return <div>Loading</div>
+          }
+          return <LinkList viewer={props.viewer} />
+        }}
+      />
+    )
+  }
+}
+
+export default LinkListPage
